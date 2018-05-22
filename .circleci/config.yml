@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8.9.4
+        environment:
+          JOBS: 1
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run:
+          name: Installing Dependencies
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Running Jest Tests
+          command: yarn run test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
