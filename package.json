@@ -13,7 +13,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "codacy": "cat ./coverage/lcov.info | codacy-coverage --token f620b5e1ebb447f1b56cf6bc57bf38c1"
   },
   "jest": {
     "preset": "jest-expo"
